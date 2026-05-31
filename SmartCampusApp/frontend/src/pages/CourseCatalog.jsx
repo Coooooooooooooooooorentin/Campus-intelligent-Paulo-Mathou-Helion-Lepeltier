@@ -38,7 +38,8 @@ export default function CourseCatalog() {
   };
 
   const filteredCourses = courses.filter(c => {
-    const matchSearch = c.titre.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    const titre = c.titre || '';
+    const matchSearch = titre.toLowerCase().includes(searchTerm.toLowerCase()) || 
                         (c.description && c.description.toLowerCase().includes(searchTerm.toLowerCase()));
     
     const matchCategory = filterCategory === 'Toutes' || c.categorie === filterCategory;
@@ -117,7 +118,7 @@ export default function CourseCatalog() {
                     </div>
                     
                     <div style={{ fontSize: '0.875rem', marginBottom: '1.5rem', backgroundColor: '#f8fafc', padding: '0.75rem', borderRadius: '8px' }}>
-                      <strong>Enseignant :</strong> Dr. {course.prof_nom} {course.prof_prenom}
+                      <strong>Enseignant :</strong> {course.prof_prenom} {course.prof_nom}
                     </div>
                   </div>
                   

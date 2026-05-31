@@ -94,7 +94,7 @@ export default function StudentEnrollments() {
                         {c.titre}
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>{c.categorie} • {c.niveau}</div>
                       </td>
-                      <td style={{ padding: '1rem' }}>Dr. {c.prof_nom} {c.prof_prenom}</td>
+                      <td style={{ padding: '1rem' }}>{c.prof_prenom} {c.prof_nom}</td>
                       <td style={{ padding: '1rem', textAlign: 'center', fontWeight: 600 }}>{c.credits_ects}</td>
                       <td style={{ padding: '1rem', textAlign: 'center' }}>
                         {c.notes_verrouillees == 1 ? (

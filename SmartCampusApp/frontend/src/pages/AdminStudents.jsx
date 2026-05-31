@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
-import { Search, UserPlus, X, Trash2 } from 'lucide-react';
+import { Search, UserPlus, X, Trash2, Filter } from 'lucide-react';
 
 export default function AdminStudents() {
   const [students, setStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterAnnee, setFilterAnnee] = useState('Toutes');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Modal State
@@ -76,11 +77,25 @@ export default function AdminStudents() {
     document.body.removeChild(link);
   };
 
-  const filteredStudents = students.filter(s => 
-    s.nom.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    s.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    s.matricule.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredStudents = students.filter(s => {
+    const matchSearch = s.nom.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                        s.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        s.matricule.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchAnnee = filterAnnee === 'Toutes' || s.annee_etude === filterAnnee;
+    return matchSearch && matchAnnee;
+  });
+
+  const availableAnnees = [...new Set(students.map(s => s.annee_etude).filter(Boolean))];
+  const expectedOrder = ['L1', 'L2', 'L3', 'M1', 'M2'];
+  availableAnnees.sort((a, b) => {
+    let idxA = expectedOrder.indexOf(a);
+    let idxB = expectedOrder.indexOf(b);
+    if (idxA === -1) idxA = 999;
+    if (idxB === -1) idxB = 999;
+    if (idxA === idxB) return a.localeCompare(b);
+    return idxA - idxB;
+  });
+  const annees = ['Toutes', ...availableAnnees];
 
   return (
     <div className="app-container">
@@ -101,6 +116,12 @@ export default function AdminStudents() {
                   style={{ paddingLeft: '2.5rem', width: '250px' }}
                 />
               </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'white', padding: '0.5rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                <Filter size={18} color="var(--text-muted)" />
+                <select value={filterAnnee} onChange={e => setFilterAnnee(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent' }}>
+                  {annees.map(an => <option key={an} value={an}>{an}</option>)}
+                </select>
+              </div>
               <button className="btn-secondary" onClick={handleExportCSV}>
                 Exporter CSV
               </button>
@@ -118,16 +139,26 @@ export default function AdminStudents() {
                   <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Nom complet</th>
                   <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Email</th>
                   <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Année</th>
+                  <th style={{ padding: '1rem', textAlign: 'left', fontWeight: 600 }}>Statut</th>
                   <th style={{ padding: '1rem', textAlign: 'center', fontWeight: 600 }}>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredStudents.map((s, i) => (
+                {filteredStudents.map((s, i) => {
+                  const estARisque = (s.moyenne !== null && parseFloat(s.moyenne) < 10) || parseInt(s.absences) >= 3;
+                  return (
                   <tr key={i} style={{ borderBottom: '1px solid var(--border-color)' }}>
                     <td style={{ padding: '1rem', color: 'var(--text-muted)' }}>{s.matricule}</td>
                     <td style={{ padding: '1rem', fontWeight: 500 }}>{s.nom} {s.prenom}</td>
                     <td style={{ padding: '1rem' }}>{s.email}</td>
                     <td style={{ padding: '1rem' }}>{s.annee_etude}</td>
+                    <td style={{ padding: '1rem' }}>
+                      {estARisque ? (
+                        <span className="badge badge-danger" title={`Moyenne: ${s.moyenne || 'N/A'} | Absences: ${s.absences}`}>À risque</span>
+                      ) : (
+                        <span className="badge badge-primary">Conforme</span>
+                      )}
+                    </td>
                     <td style={{ padding: '1rem', textAlign: 'center', display: 'flex', justifyContent: 'center', gap: '1rem', alignItems: 'center' }}>
                       <Link to={`/admin/students/${s.id}`} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'underline' }}>
                         Voir profil
@@ -137,7 +168,8 @@ export default function AdminStudents() {
                       </button>
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>

@@ -61,19 +61,8 @@ export default function Schedule() {
 
   const weekDays = getWeekDays();
 
-  // Filtrer les séances pour la semaine courante
-  const seancesOfWeek = allSeances.filter(seance => {
-    const seanceDate = new Date(seance.date_heure_debut);
-    const weekEnd = new Date(currentWeekStart);
-    weekEnd.setDate(weekEnd.getDate() + 5); // Jusqu'au vendredi inclus
-    
-    // On met tout à 0h pour une comparaison de date pure
-    const sDateOnly = new Date(seanceDate.getFullYear(), seanceDate.getMonth(), seanceDate.getDate());
-    const startOnly = new Date(currentWeekStart.getFullYear(), currentWeekStart.getMonth(), currentWeekStart.getDate());
-    const endOnly = new Date(weekEnd.getFullYear(), weekEnd.getMonth(), weekEnd.getDate());
-    
-    return sDateOnly >= startOnly && sDateOnly < endOnly;
-  });
+  // Les séances sont désormais récurrentes chaque semaine.
+  // On n'utilise plus le filtre restrictif `seancesOfWeek`.
 
   // Heures affichées dans la grille (8h à 20h)
   const HOURS = Array.from({ length: 13 }, (_, i) => i + 8);
@@ -198,10 +187,10 @@ export default function Schedule() {
 
                 {/* Colonnes des Jours */}
                 {weekDays.map((day, dayIdx) => {
-                  // Trouver les cours de ce jour spécifique
-                  const daySeances = seancesOfWeek.filter(s => {
+                  // Trouver les cours de ce jour spécifique (en fonction du jour de la semaine uniquement, pour la récurrence)
+                  const daySeances = allSeances.filter(s => {
                     const d = new Date(s.date_heure_debut);
-                    return d.getDate() === day.getDate() && d.getMonth() === day.getMonth();
+                    return d.getDay() === day.getDay();
                   });
 
                   return (
@@ -254,7 +243,7 @@ export default function Schedule() {
                             
                             {height >= 60 && (
                               <div style={{ fontSize: '0.8rem', color: colors.text, marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><MapPin size={12}/> Salle {seance.salle}</div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><MapPin size={12}/> {seance.salle}</div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><User size={12}/> {seance.prof_nom || 'Moi'}</div>
                               </div>
                             )}

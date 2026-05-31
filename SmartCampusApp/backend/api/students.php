@@ -35,8 +35,10 @@ if ($method === 'GET') {
         echo json_encode(['success' => true, 'etudiant' => $etudiant]);
 
     } else {
-        // Lister tous les étudiants
-        $stmt = $conn->prepare("SELECT e.id, e.matricule, e.annee_etude, u.nom, u.prenom, u.email 
+        // Lister tous les étudiants avec leur moyenne globale et le nombre d'absences
+        $stmt = $conn->prepare("SELECT e.id, e.matricule, e.annee_etude, u.nom, u.prenom, u.email,
+                                (SELECT ROUND(AVG(valeur), 2) FROM notes WHERE id_etudiant = e.id) as moyenne,
+                                (SELECT COUNT(*) FROM presences WHERE id_etudiant = e.id AND statut = 'Absent') as absences
                                 FROM etudiants e 
                                 JOIN utilisateurs u ON e.id_utilisateur = u.id 
                                 ORDER BY u.nom ASC");
@@ -82,7 +84,11 @@ if ($method === 'GET') {
 
     } catch(PDOException $e) {
         $conn->rollBack();
-        echo json_encode(['success' => false, 'message' => 'Erreur lors de la création : ' . $e->getMessage()]);
+        if ($e->getCode() == 23000) {
+            echo json_encode(['success' => false, 'message' => 'Un étudiant existe déjà avec cette adresse email.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de la création : ' . $e->getMessage()]);
+        }
     }
 
 } else if ($method === 'PUT') {
@@ -111,7 +117,11 @@ if ($method === 'GET') {
         echo json_encode(['success' => true, 'message' => 'Profil mis à jour.']);
     } catch(PDOException $e) {
         $conn->rollBack();
-        echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour.']);
+        if ($e->getCode() == 23000) {
+            echo json_encode(['success' => false, 'message' => 'Cette adresse email est déjà utilisée par un autre étudiant.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour : ' . $e->getMessage()]);
+        }
     }
 } else if ($method === 'DELETE') {
     if(!isset($_GET['id'])) {

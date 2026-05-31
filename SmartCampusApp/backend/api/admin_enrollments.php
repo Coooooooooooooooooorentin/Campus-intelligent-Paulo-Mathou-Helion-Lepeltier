@@ -46,6 +46,37 @@ if ($method === 'GET') {
             exit;
         }
 
+        // 1. Vérification du niveau
+        $check_niveau = $conn->prepare("
+            SELECT e.annee_etude, c.niveau 
+            FROM etudiants e, cours c 
+            WHERE e.id = :id_etudiant AND c.id = :id_cours
+        ");
+        $check_niveau->execute([':id_etudiant' => $data->id_etudiant, ':id_cours' => $data->id_cours]);
+        $niveau_info = $check_niveau->fetch();
+        
+        if ($niveau_info && $niveau_info['annee_etude'] !== $niveau_info['niveau'] && $niveau_info['niveau'] !== 'Tous niveaux') {
+            echo json_encode(['success' => false, 'message' => "L'étudiant est en " . $niveau_info['annee_etude'] . " et ce cours est pour le niveau " . $niveau_info['niveau'] . "."]);
+            $conn->rollBack();
+            exit;
+        }
+
+        // 2. Vérification des conflits d'horaires
+        $check_conflit = $conn->prepare("
+            SELECT s1.id
+            FROM seances s1
+            JOIN inscriptions i ON i.id_cours = s1.id_cours
+            JOIN seances s2 ON s2.id_cours = :id_cours
+            WHERE i.id_etudiant = :id_etudiant
+            AND (s1.date_heure_debut < s2.date_heure_fin AND s1.date_heure_fin > s2.date_heure_debut)
+        ");
+        $check_conflit->execute([':id_cours' => $data->id_cours, ':id_etudiant' => $data->id_etudiant]);
+        if ($check_conflit->rowCount() > 0) {
+            echo json_encode(['success' => false, 'message' => "L'étudiant a déjà un autre cours à ces horaires."]);
+            $conn->rollBack();
+            exit;
+        }
+
         $check_insc = $conn->prepare("SELECT id FROM inscriptions WHERE id_etudiant = :id_etudiant AND id_cours = :id_cours");
         $check_insc->execute([':id_etudiant' => $data->id_etudiant, ':id_cours' => $data->id_cours]);
         if ($check_insc->rowCount() > 0) {

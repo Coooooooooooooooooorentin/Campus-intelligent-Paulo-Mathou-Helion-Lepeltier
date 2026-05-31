@@ -71,6 +71,25 @@ export default function TeacherGrades() {
     }
   };
 
+  const handleExportCSV = () => {
+    if (students.length === 0) return alert("Aucune donnée à exporter.");
+    const headers = ["Matricule", "Nom", "Prenom", "Cours", "Note"];
+    const csvContent = [
+      headers.join(";"),
+      ...students.map(s => `${s.matricule};${s.nom};${s.prenom};${s.cours_titre};${s.note !== null ? s.note : 'N/A'}`)
+    ].join("\n");
+
+    const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" }); // uFEFF = BOM pour Excel
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", `Export_Notes_${new Date().toLocaleDateString('fr-FR').replace(/\//g, '-')}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const filteredStudents = students.filter(s => 
     s.nom.toLowerCase().includes(searchTerm.toLowerCase()) || 
     s.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -97,17 +116,22 @@ export default function TeacherGrades() {
       <div className="main-content">
         <TopBar />
         <div className="page-content">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
             <h1>Gestion des Notes & Statistiques</h1>
-            <div className="input-group" style={{ marginBottom: 0, flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
-              <Search size={20} color="var(--text-muted)" style={{ position: 'absolute', left: 10 }} />
-              <input 
-                type="text" 
-                placeholder="Rechercher étudiant ou cours..." 
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-                style={{ paddingLeft: '2.5rem', width: '300px' }}
-              />
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <div className="input-group" style={{ marginBottom: 0, flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
+                <Search size={20} color="var(--text-muted)" style={{ position: 'absolute', left: 10 }} />
+                <input 
+                  type="text" 
+                  placeholder="Rechercher étudiant ou cours..." 
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  style={{ paddingLeft: '2.5rem', width: '300px' }}
+                />
+              </div>
+              <button className="btn-secondary" onClick={handleExportCSV}>
+                Exporter CSV
+              </button>
             </div>
           </div>
 

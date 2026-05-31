@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
-import { Search, PlusCircle, X, Trash2, Edit, Users, UserPlus, UserMinus } from 'lucide-react';
+import { Search, PlusCircle, X, Trash2, Edit, Users, UserPlus, UserMinus, Filter } from 'lucide-react';
 
 export default function AdminCourses() {
   const [courses, setCourses] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [allStudents, setAllStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filterProf, setFilterProf] = useState('Tous');
   
   // Modal Création/Edition
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -152,11 +153,18 @@ export default function AdminCourses() {
     }
   };
 
-  const filteredCourses = courses.filter(c => 
-    c.titre.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    (c.prof_nom && c.prof_nom.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (c.categorie && c.categorie.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  const professeursUniques = ['Tous', ...new Set(courses.map(c => c.prof_nom ? `${c.prof_prenom} ${c.prof_nom}` : null).filter(Boolean))].sort();
+
+  const filteredCourses = courses.filter(c => {
+    const matchSearch = c.titre.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      (c.prof_nom && c.prof_nom.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (c.categorie && c.categorie.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    const profFullName = c.prof_nom ? `${c.prof_prenom} ${c.prof_nom}` : null;
+    const matchProf = filterProf === 'Tous' || profFullName === filterProf;
+    
+    return matchSearch && matchProf;
+  });
 
   return (
     <div className="app-container">
@@ -176,6 +184,12 @@ export default function AdminCourses() {
                   onChange={e => setSearchTerm(e.target.value)}
                   style={{ paddingLeft: '2.5rem', width: '300px' }}
                 />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'white', padding: '0.5rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                <Filter size={18} color="var(--text-muted)" />
+                <select value={filterProf} onChange={e => setFilterProf(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent' }}>
+                  {professeursUniques.map(prof => <option key={prof} value={prof}>{prof}</option>)}
+                </select>
               </div>
               <button className="btn-primary" onClick={openCreateModal}>
                 <PlusCircle size={20} /> Créer un cours
@@ -202,7 +216,7 @@ export default function AdminCourses() {
                       <span style={{ backgroundColor: '#e0e7ff', color: '#4f46e5', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', marginRight: '5px' }}>{c.niveau}</span>
                       <span style={{ backgroundColor: '#f3f4f6', color: '#4b5563', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem' }}>{c.categorie}</span>
                     </td>
-                    <td style={{ padding: '1rem' }}>{c.prof_nom ? `Dr. ${c.prof_nom} ${c.prof_prenom}` : <span style={{ color: 'red' }}>Non assigné</span>}</td>
+                    <td style={{ padding: '1rem' }}>{c.prof_nom ? `${c.prof_prenom} ${c.prof_nom}` : <span style={{ color: 'red' }}>Non assigné</span>}</td>
                     <td style={{ padding: '1rem', textAlign: 'center' }}>
                       <span style={{ fontWeight: 600, color: c.nb_inscrits >= c.capacite_max ? 'red' : 'inherit' }}>{c.nb_inscrits}</span> / {c.capacite_max}
                     </td>
