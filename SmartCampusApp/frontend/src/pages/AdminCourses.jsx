@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - AdminCourses.jsx
+ * 
+ * Description : Composant administrateur : permet de lister, créer, modifier et supprimer les cours disponibles dans l'établissement.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - create_table.php
+ * 
+ * Description : Fichier create_table.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - create_table.php
+ * 
+ * Description : Fichier create_table.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 try {
     $sql = "CREATE TABLE IF NOT EXISTS messages (

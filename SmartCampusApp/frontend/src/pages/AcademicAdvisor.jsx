@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - AcademicAdvisor.jsx
+ * 
+ * Description : Gère l'interface du conseiller académique, permettant d'assigner des professeurs aux cours et de gérer la planification globale.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

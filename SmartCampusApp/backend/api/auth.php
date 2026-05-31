@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - auth.php
+ * 
+ * Description : API gérant l'authentification, la création de session et la vérification des identifiants.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - auth.php
+ * 
+ * Description : API gérant l'authentification, la création de session et la vérification des identifiants.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

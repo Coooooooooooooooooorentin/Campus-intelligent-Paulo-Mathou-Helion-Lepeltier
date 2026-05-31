@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - AdminTeacherProfile.jsx
+ * 
+ * Description : Affiche le profil détaillé d'un enseignant, ses départements et ses cours affectés.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';

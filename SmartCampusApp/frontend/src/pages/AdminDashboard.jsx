@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - AdminDashboard.jsx
+ * 
+ * Description : Tableau de bord principal de l'administrateur, offrant une vue d'ensemble des statistiques (étudiants, professeurs, cours).
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';

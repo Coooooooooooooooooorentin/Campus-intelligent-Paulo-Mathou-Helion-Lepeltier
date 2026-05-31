@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - StudentDashboard.jsx
+ * 
+ * Description : Tableau de bord de l'étudiant : récapitulatif des cours du jour, notifications et statut académique.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';

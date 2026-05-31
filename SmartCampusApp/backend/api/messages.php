@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - messages.php
+ * 
+ * Description : API gérant la communication et les messages internes de la plateforme.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - messages.php
+ * 
+ * Description : API gérant la communication et les messages internes de la plateforme.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

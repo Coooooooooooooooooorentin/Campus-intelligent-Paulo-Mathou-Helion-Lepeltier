@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - Transcript.jsx
+ * 
+ * Description : Relevé de notes officiel de l'étudiant, générant le bulletin académique complet.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

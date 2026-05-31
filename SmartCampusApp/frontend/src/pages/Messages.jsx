@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - Messages.jsx
+ * 
+ * Description : Système de messagerie interne permettant la communication entre les différents utilisateurs.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

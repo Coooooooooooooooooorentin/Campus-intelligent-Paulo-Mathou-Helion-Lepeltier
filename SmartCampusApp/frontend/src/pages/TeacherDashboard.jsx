@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - TeacherDashboard.jsx
+ * 
+ * Description : Tableau de bord du professeur : résumé de ses classes, cours à venir et actions rapides.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';

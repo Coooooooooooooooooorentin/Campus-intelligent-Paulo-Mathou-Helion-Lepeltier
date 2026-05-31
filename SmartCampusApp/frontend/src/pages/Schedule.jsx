@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - Schedule.jsx
+ * 
+ * Description : Composant principal du calendrier (Emploi du temps), gérant l'affichage dynamique des séances récurrentes selon le rôle de l'utilisateur.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

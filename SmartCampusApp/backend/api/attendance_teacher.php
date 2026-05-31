@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - attendance_teacher.php
+ * 
+ * Description : Fichier attendance_teacher.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - attendance_teacher.php
+ * 
+ * Description : Fichier attendance_teacher.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 $method = $_SERVER['REQUEST_METHOD'];

@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - courses_admin.php
+ * 
+ * Description : Fichier courses_admin.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - courses_admin.php
+ * 
+ * Description : Fichier courses_admin.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 $method = $_SERVER['REQUEST_METHOD'];

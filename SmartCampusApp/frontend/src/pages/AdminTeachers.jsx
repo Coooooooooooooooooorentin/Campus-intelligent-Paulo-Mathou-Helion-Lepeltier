@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - AdminTeachers.jsx
+ * 
+ * Description : Interface administrateur pour la gestion du corps professoral.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';

@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - StudentAttendance.jsx
+ * 
+ * Description : Interface permettant à l'étudiant de consulter ses absences et présences aux cours.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

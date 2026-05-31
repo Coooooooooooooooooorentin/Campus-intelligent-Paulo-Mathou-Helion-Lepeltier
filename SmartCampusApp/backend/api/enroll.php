@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - enroll.php
+ * 
+ * Description : API gérant les inscriptions des étudiants aux différents cours.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - enroll.php
+ * 
+ * Description : API gérant les inscriptions des étudiants aux différents cours.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 $method = $_SERVER['REQUEST_METHOD'];

@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - teacher_grades_stats.php
+ * 
+ * Description : Fichier teacher_grades_stats.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - teacher_grades_stats.php
+ * 
+ * Description : Fichier teacher_grades_stats.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

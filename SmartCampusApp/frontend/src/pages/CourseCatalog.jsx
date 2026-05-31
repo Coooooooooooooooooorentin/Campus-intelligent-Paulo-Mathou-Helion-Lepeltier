@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - CourseCatalog.jsx
+ * 
+ * Description : Catalogue public ou semi-public affichant l'ensemble des cours proposés par l'université.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

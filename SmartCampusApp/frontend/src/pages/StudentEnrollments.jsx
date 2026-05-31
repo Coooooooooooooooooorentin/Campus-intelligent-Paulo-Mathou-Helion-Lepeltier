@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - StudentEnrollments.jsx
+ * 
+ * Description : Gestion des inscriptions aux cours pour un étudiant, affichage de ses matières actuelles.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

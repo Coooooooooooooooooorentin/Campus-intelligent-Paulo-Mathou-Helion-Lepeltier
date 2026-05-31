@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - TeacherGrades.jsx
+ * 
+ * Description : Interface permettant au professeur de saisir, modifier et valider les notes de ses étudiants.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

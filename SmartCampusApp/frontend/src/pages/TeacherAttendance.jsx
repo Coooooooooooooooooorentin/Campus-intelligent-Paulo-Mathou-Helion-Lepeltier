@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - TeacherAttendance.jsx
+ * 
+ * Description : Interface professeur pour faire l'appel et noter la présence des étudiants inscrits à ses cours.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';

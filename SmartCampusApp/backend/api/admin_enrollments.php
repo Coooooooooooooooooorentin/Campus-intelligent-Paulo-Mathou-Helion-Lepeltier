@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - admin_enrollments.php
+ * 
+ * Description : API permettant aux administrateurs de forcer ou modifier des inscriptions.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - admin_enrollments.php
+ * 
+ * Description : API permettant aux administrateurs de forcer ou modifier des inscriptions.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 $method = $_SERVER['REQUEST_METHOD'];

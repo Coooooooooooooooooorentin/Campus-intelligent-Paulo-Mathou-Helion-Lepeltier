@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - lock_grades.php
+ * 
+ * Description : Fichier lock_grades.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - lock_grades.php
+ * 
+ * Description : Fichier lock_grades.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

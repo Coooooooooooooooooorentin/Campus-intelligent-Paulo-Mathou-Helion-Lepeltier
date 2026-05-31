@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - transcript.php
+ * 
+ * Description : API générant les données du relevé de notes d'un étudiant.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - transcript.php
+ * 
+ * Description : API générant les données du relevé de notes d'un étudiant.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

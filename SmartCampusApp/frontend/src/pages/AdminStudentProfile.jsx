@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - AdminStudentProfile.jsx
+ * 
+ * Description : Affiche le profil détaillé d'un étudiant côté administration (informations personnelles, cursus, notes).
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';

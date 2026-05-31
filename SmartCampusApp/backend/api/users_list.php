@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - users_list.php
+ * 
+ * Description : Fichier users_list.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - users_list.php
+ * 
+ * Description : Fichier users_list.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - schedule.php
+ * 
+ * Description : API responsable de la récupération, création et gestion des séances d'emploi du temps.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - schedule.php
+ * 
+ * Description : API responsable de la récupération, création et gestion des séances d'emploi du temps.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

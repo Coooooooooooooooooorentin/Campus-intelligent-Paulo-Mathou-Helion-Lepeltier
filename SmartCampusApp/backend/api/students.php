@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - students.php
+ * 
+ * Description : Fichier students.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - students.php
+ * 
+ * Description : Fichier students.php : Fonctionnalité liée au système SmartCampus.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 $method = $_SERVER['REQUEST_METHOD'];

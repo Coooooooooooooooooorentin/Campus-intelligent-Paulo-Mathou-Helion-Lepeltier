@@ -1,4 +1,16 @@
 <?php
+/**
+ * SMARTCAMPUS API - grades.php
+ * 
+ * Description : API de gestion des notes : lecture pour les étudiants, écriture pour les professeurs.
+ * Rôle : Backend / Base de données
+ */
+/**
+ * SMARTCAMPUS API - grades.php
+ * 
+ * Description : API de gestion des notes : lecture pour les étudiants, écriture pour les professeurs.
+ * Rôle : Backend / Base de données
+ */
 include_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - StudentScan.jsx
+ * 
+ * Description : Interface mobile-friendly pour scanner un QR Code ou valider sa présence en classe.
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useEffect, useState, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { CheckCircle, AlertTriangle, Loader, Camera } from 'lucide-react';

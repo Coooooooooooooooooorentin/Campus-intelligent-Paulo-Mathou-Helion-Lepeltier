@@ -1,3 +1,10 @@
+/**
+ * SMARTCAMPUS FRONTEND - Login.jsx
+ * 
+ * Description : Page d'authentification centralisée pour tous les rôles (Étudiant, Professeur, Admin).
+ * Rôle : Interface Utilisateur (React)
+ */
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GraduationCap } from 'lucide-react';
